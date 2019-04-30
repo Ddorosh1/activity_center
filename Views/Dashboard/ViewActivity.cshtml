@@ -1,0 +1,24 @@
+@model Activity
+
+<a href ="/dashboard">Dashboard</a> | <a href = "/logout">Logout</a> |
+  @if(Model.UserId == @ViewBag.UserId)
+      {
+        <a href="/delete/activity/@Model.ActivityId">Delete</a>
+      }else{
+        @if(Model.Participants.Any(p => p.UserId == ViewBag.UserId))
+        {
+          <a href="/leave/activity/@Model.ActivityId"><button class="btn btn-danger">Leave</button></a>
+        }else{
+          <a href="/join/activity/@Model.ActivityId"><button class="btn btn-success">Join</button></a>
+        }
+      }
+
+<h1>@Model.Title</h1>
+<h4>Event Coordinator: @Model.Coordinator</h4>
+<h3>Description</h3>
+<p> @Model.Description</p>
+<h4>  Participants</h4>
+@foreach(var p in Model.Participants)
+{
+  <p> @p.User.FirstName</p>
+}

@@ -1,0 +1,38 @@
+@model List<Activity>
+@using System.Linq;
+<h1>Dashboard</h1>
+<a href="/create/activity">Add New Activity</a> | <a href = "/logout">Logout</a>
+<h3>Hello @ViewBag.Name</h3>
+
+<table class="table">
+  <tr>
+    <th>Activity</th>
+    <th>Date and Time</th>
+    <th>Duration</th>
+    <th>Event Coordinator</th>
+    <th>No. of Participants</th>
+    <th>Actions</th>
+  </tr>
+    @foreach(var a in Model)
+    {
+  <tr>
+    <td><a href="/view/activity/@a.ActivityId">@a.Title</a></td>
+    <td>@a.Date.ToString("MM/dd ") at @a.Time.ToString("h:mm tt")</td>
+    <td>@a.Duration @a.DurationUnit</td>
+    <td>@a.Coordinator</td>
+    <td>@a.Participants.Count</td>
+    <td>@if(@a.UserId == @ViewBag.UserId)
+      {
+        <a href="/delete/activity/@a.ActivityId">Delete</a>
+      }else{
+        @if(a.Participants.Any(p => p.UserId == ViewBag.UserId))
+        {
+          <a href="/leave/activity/@a.ActivityId">Leave</a>
+        }else{
+          <a href="/join/activity/@a.ActivityId">Join</a>
+        }
+      }
+    </td>
+  </tr>
+    }
+</table>

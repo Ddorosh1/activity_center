@@ -1,0 +1,31 @@
+@model Activity
+
+<body>
+    <h1>Create Activity</h1>
+    <a href ="/dashboard">Dashboard</a> | <a href = "/logout">Logout</a>
+
+<form asp-action="AddActivity" asp-controller="Dashboard" method="post">
+        <span asp-validation-for="Title"></span><br>
+        <label asp-for="Title"></label><br>
+        <input asp-for="Title"><br>
+        <span asp-validation-for="Date"></span><br>
+        <label asp-for="Date"></label><br>
+        <input type="date" asp-for="Date"><br>
+        <span asp-validation-for="Time"></span><br>
+        <label asp-for="Time"></label><br>
+        <input type = "time" asp-for="Time"><br>
+        <span asp-validation-for="Duration"></span><br>
+        <label asp-for="Duration"></label><br>
+        <input asp-for="Duration">
+        <span asp-validation-for="DurationUnit"></span>
+        <select asp-for="DurationUnit">
+          <option value="minutes">Minutes</option>
+          <option value="hours">Hours</option>
+        </select><br>
+        <span asp-validation-for="Description"></span><br>
+        <label asp-for="Description"></label><br>
+        <input type="textbox" asp-for="Description"><br>
+<button>Create</button>
+</form>
+
+</body>
